@@ -1,6 +1,7 @@
 
-	
+
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -32,6 +33,11 @@ public class Main extends Application {
 		}
 	}
 	
+	@Override
+	public void stop() {
+		NetworkManager.closeNetwork();
+	}
+
 	private void setDisplay(final Scene scene) {
 		DisplayManager.addDisplayListener(new DisplayListener() {
 			@Override
@@ -40,17 +46,38 @@ public class Main extends Application {
 				ta.appendText("\n" + message + "\n");
 			}	
 			@Override
-			public void displaySecondary(String message) {
-				ListView<String> connectedlist = (ListView<String>) scene.lookup("#connectedlist");
-				ObservableList<String> items = connectedlist.getItems();
-				if (!items.contains(message)) {
-					items.add(message);
-					connectedlist.setItems(items);
-				}
+			public void addUser(final String user) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						ListView<String> connectedlist = (ListView<String>) scene.lookup("#connectedlist");
+						ObservableList<String> items = connectedlist.getItems();
+						if (!items.contains(user)) {
+							items.add(user);
+							connectedlist.setItems(items);
+						}
+					}
+				});
+			}
+			@Override
+			public void removeUser(final String user) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						ListView<String> connectedlist = (ListView<String>) scene.lookup("#connectedlist");
+						ObservableList<String> items = connectedlist.getItems();
+						for (int i=0; i<items.size(); i++) {
+							if (items.get(i).equals(user)) {
+								items.remove(i);
+							}
+						}
+						connectedlist.setItems(items);
+					}
+				});
 			}
 		});
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}

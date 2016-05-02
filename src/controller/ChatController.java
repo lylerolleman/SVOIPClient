@@ -44,4 +44,14 @@ public class ChatController {
 		Integer port = Integer.parseInt(portfield.getText());
 		NetworkManager.establishConnection(NetworkManager.getID(), addressfield.getText(), port);
 	}
+	
+	@FXML public void disconnect() {
+		ObservableList<String> ids = connectedlist.getSelectionModel().getSelectedItems();
+		ObservableList<String> items = connectedlist.getItems();
+		for (int i=0; i<ids.size(); i++) {
+			NetworkManager.sendDisconnect(ids.get(i));
+			items.remove(ids.get(i));
+		}
+		connectedlist.setItems(items);
+	}
 }
