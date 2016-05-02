@@ -3,7 +3,7 @@ The GUI client component of SVOIP
 
 reinventing the wheel to gain experience using JavaFX and FXML
 
-Source code for SVOIP.jar (found in build/externalLibs) can be found here https://github.com/lylerolleman/SVOIP_Protocol
+Source code for SVOIP.jar (found in build/externalLibs) can be found here https://github.com/lylerolleman/SVOIP_Network
 
 
 Right now this is VERY basic and very much WIP. 
