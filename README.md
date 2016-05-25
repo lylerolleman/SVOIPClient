@@ -14,4 +14,4 @@ This does not need to be on a different computer, as it will find an available p
 nickname will appear in the window on the right. Multiple users can be connected at the same time. To send a message to those clients, 
 click on their name in the list to select them. Only those selected will see the message sent. ctrl click deselects. 
 
-Currently text is only supported, though voice is coming (along with a lot more QoL features). 
+Currently text and voice are both functional, though probably a bit sketchy on the voice side. 
